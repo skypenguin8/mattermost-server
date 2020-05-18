@@ -398,7 +398,7 @@ run-cli: start-docker ## Runs CLI.
 run-client: ## Runs the webapp.
 	@echo Running mattermost client for development
 
-	ln -nfs $(BUILD_WEBAPP_DIR)/dist client
+	#ln -nfs $(BUILD_WEBAPP_DIR)/dist client
 	cd $(BUILD_WEBAPP_DIR) && $(MAKE) run
 
 run-client-fullmap: ## Legacy alias to run-client
