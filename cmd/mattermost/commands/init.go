@@ -41,11 +41,12 @@ func InitDBCommandContext(configDSN string) (*app.App, error) {
 		return nil, err
 	}
 
-	a := s.FakeApp()
+	a := app.New(app.ServerConnector(s))
 
 	if model.BuildEnterpriseReady == "true" {
-		a.LoadLicense()
+		a.Srv().LoadLicense()
 	}
+	a.InitServer()
 
 	return a, nil
 }
