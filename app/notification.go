@@ -272,10 +272,7 @@ func (a *App) SendNotifications(post *model.Post, team *model.Team, channel *mod
 
 			pushResult1 := ShouldSendPushNotification(profileMap[id], channelMemberNotifyPropsMap[id], true, status, post)
 			resMessage := post.Message
-			a.notificationsLog.Debug("pushResult1", mlog.Bool("result", pushResult1))
-			a.notificationsLog.Debug("pushResult1", mlog.String("post", resMessage))
 			resPushCnt := strings.Index(resMessage, "!호출")
-			a.notificationsLog.Debug("pushResult1", mlog.Int("resPushCnt", resPushCnt))
 
 			if resPushCnt == 0 {
 				pushResult1 = true
@@ -300,7 +297,7 @@ func (a *App) SendNotifications(post *model.Post, team *model.Team, channel *mod
 				)
 			} else {
 				// register that a notification was not sent
-				a.NotificationsLog().Warn("Notification not sent : mentionedUsersList",
+				a.NotificationsLog().Warn("Notification not sent",
 					mlog.String("ackId", ""),
 					mlog.String("type", model.PUSH_TYPE_MESSAGE),
 					mlog.String("userId", id),
@@ -324,10 +321,7 @@ func (a *App) SendNotifications(post *model.Post, team *model.Team, channel *mod
 
 				pushResult2 := ShouldSendPushNotification(profileMap[id], channelMemberNotifyPropsMap[id], false, status, post)
 				resMessage := post.Message
-				a.notificationsLog.Debug("pushResult2", mlog.Bool("result", pushResult2))
-				a.notificationsLog.Debug("pushResult2", mlog.String("post", resMessage))
 				resPushCnt := strings.Index(resMessage, "!호출")
-				a.notificationsLog.Debug("pushResult2", mlog.Int("resPushCnt", resPushCnt))
 
 				if resPushCnt == 0 {
 					pushResult2 = true
@@ -343,7 +337,7 @@ func (a *App) SendNotifications(post *model.Post, team *model.Team, channel *mod
 					)
 				} else {
 					// register that a notification was not sent
-					a.NotificationsLog().Warn("Notification not sent : allActivityPushUserIds",
+					a.NotificationsLog().Warn("Notification not sent",
 						mlog.String("ackId", ""),
 						mlog.String("type", model.PUSH_TYPE_MESSAGE),
 						mlog.String("userId", id),
